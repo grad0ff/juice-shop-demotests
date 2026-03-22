@@ -1,6 +1,6 @@
 package me.vodarga.api.extension;
 
-import me.vodarga.api.config.RestAssuredConfigurer;
+import me.vodarga.api.service.RestAssuredConfigurer;
 import me.vodarga.core.SuiteExtension;
 import org.junit.jupiter.api.extension.ExtensionContext;
 

@@ -1,12 +1,13 @@
-package me.vodarga.api.enums;
+package me.vodarga.api.service;
 
-import static me.vodarga.config.ApiConfig.API_CFG;
+import static me.vodarga.api.config.ApiConfig.API_CFG;
 import static me.vodarga.core.config.CoreConfig.CORE_CFG;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import me.vodarga.api.config.AuthData;
-import me.vodarga.api.config.User;
+import me.vodarga.api.enums.UserType;
+import me.vodarga.api.model.AuthData;
+import me.vodarga.api.model.User;
 
 public class AuthDataProvider {
 

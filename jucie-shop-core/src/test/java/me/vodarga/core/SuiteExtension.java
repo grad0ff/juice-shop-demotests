@@ -7,11 +7,9 @@ import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 public interface SuiteExtension extends BeforeAllCallback {
 
   default void beforeSuite(ExtensionContext context) {
-    throw new RuntimeException("Method beforeSuite() must be overridden");
   }
 
   default void afterSuite(ExtensionContext context) {
-    throw new RuntimeException("Method afterSuite() must be overridden");
   }
 
   @Override

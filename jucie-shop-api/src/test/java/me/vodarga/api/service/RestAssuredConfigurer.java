@@ -1,4 +1,4 @@
-package me.vodarga.api.config;
+package me.vodarga.api.service;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;

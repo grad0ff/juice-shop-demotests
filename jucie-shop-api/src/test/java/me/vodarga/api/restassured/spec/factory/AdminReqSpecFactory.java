@@ -1,9 +1,9 @@
-package me.vodarga.api.enums;
+package me.vodarga.api.restassured.spec.factory;
 
 import io.restassured.authentication.BasicAuthScheme;
 import io.restassured.builder.RequestSpecBuilder;
 import lombok.RequiredArgsConstructor;
-import me.vodarga.api.config.AuthData;
+import me.vodarga.api.model.AuthData;
 
 @RequiredArgsConstructor
 public class AdminReqSpecFactory extends ReqSpecFactory {

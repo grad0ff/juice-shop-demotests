@@ -9,12 +9,12 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.response.Response;
 import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
-import java.io.PrintStream;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RequestResponseFilter implements Filter {
 
-  private static final PrintStream printStream = System.out;
-  private static final LogDetail logDetail = LogDetail.ALL;
+  private static final Set<String> blacklistedHeaders = new HashSet<>();
 
   @Override
   public Response filter(FilterableRequestSpecification requestSpec,
@@ -27,12 +27,12 @@ public class RequestResponseFilter implements Filter {
     return response;
   }
 
-  private void printResponse(Response response) {
-    print(response, response.getBody(), printStream, logDetail, true, null);
+  private void printRequest(FilterableRequestSpecification spec) {
+    print(spec, spec.getMethod(), spec.getURI(), LogDetail.ALL, blacklistedHeaders, System.out, true);
   }
 
-  private void printRequest(FilterableRequestSpecification requestSpec) {
-    print(requestSpec, requestSpec.getMethod(), requestSpec.getURI(), logDetail, null, printStream, true);
+  private void printResponse(Response response) {
+    print(response, response.getBody(), System.out, LogDetail.ALL, true, blacklistedHeaders);
   }
 
 }
