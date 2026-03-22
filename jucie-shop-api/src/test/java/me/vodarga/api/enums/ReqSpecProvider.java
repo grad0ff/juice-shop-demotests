@@ -20,6 +20,7 @@ public final class ReqSpecProvider {
     AuthData authData = AuthDataProvider.getData(userType);
     return switch (userType) {
       case ADMIN -> new AdminReqSpecFactory(authData);
+      case NO_USER -> new NoUserReqSpecFactory(authData);
     };
 
   }

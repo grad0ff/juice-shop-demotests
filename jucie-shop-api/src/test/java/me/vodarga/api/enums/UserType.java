@@ -2,6 +2,7 @@ package me.vodarga.api.enums;
 
 public enum UserType {
 
-  ADMIN
+  ADMIN,
+  NO_USER
 
 }

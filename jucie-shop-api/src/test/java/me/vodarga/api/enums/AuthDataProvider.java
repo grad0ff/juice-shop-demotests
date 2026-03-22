@@ -17,6 +17,7 @@ public class AuthDataProvider {
       case ADMIN -> authData.computeIfAbsent(userType,
           key -> new AuthData(CORE_CFG.baseUrl(), API_CFG.basePath(), new User(CORE_CFG.userName(),
               CORE_CFG.userPassword())));
+      case NO_USER -> new AuthData(CORE_CFG.baseUrl(), API_CFG.basePath(), null);
     };
   }
 
