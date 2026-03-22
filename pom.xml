@@ -37,6 +37,8 @@
         <groupId>io.rest-assured</groupId>
         <artifactId>rest-assured-bom</artifactId>
         <version>${rest-assured.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.aeonbits.owner</groupId>

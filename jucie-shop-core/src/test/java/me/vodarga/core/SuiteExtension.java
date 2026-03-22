@@ -6,11 +6,11 @@ import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 
 public interface SuiteExtension extends BeforeAllCallback {
 
-  default void beforeSuite() {
+  default void beforeSuite(ExtensionContext context) {
     throw new RuntimeException("Method beforeSuite() must be overridden");
   }
 
-  default void afterSuite() {
+  default void afterSuite(ExtensionContext context) {
     throw new RuntimeException("Method afterSuite() must be overridden");
   }
 
@@ -19,8 +19,8 @@ public interface SuiteExtension extends BeforeAllCallback {
     context.getRoot()
         .getStore(Namespace.GLOBAL)
         .getOrComputeIfAbsent(getClass(), key -> {
-          beforeSuite();
-          return (AutoCloseable) this::afterSuite;
+          beforeSuite(context);
+          return (AutoCloseable) () -> afterSuite(context);
         });
   }
 

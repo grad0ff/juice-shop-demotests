@@ -1,8 +1,8 @@
-package me.vodarga.config;
+package me.vodarga.api.config;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
-import me.vodarga.api.config.restassured.RequestResponseFilter;
+import me.vodarga.api.restassured.RequestResponseFilter;
 import me.vodarga.core.config.Configurer;
 
 public class RestAssuredConfigurer implements Configurer {
