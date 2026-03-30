@@ -3,6 +3,9 @@ package me.vodarga.core.config;
 import org.aeonbits.owner.Config.Sources;
 import org.aeonbits.owner.ConfigFactory;
 
+/**
+ * Общие настройки модулей
+ */
 @Sources("classpath:project.properties")
 public interface CoreConfig extends org.aeonbits.owner.Config {
 

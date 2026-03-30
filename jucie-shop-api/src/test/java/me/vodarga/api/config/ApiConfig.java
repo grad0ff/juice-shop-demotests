@@ -4,6 +4,9 @@ import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 import org.aeonbits.owner.ConfigFactory;
 
+ /**
+ * Настройки модуля тестов API
+ */
 @Sources("classpath:api.properties")
 public interface ApiConfig extends Config {
 
