@@ -13,6 +13,7 @@
   <modules>
     <module>jucie-shop-core</module>
     <module>jucie-shop-api</module>
+    <module>jucie-shop-ui</module>
   </modules>
 
   <properties>
