@@ -8,7 +8,8 @@ public class RestAssuredConfigExtension implements SuiteExtension {
 
   @Override
   public void beforeSuite(ExtensionContext context) {
-    new RestAssuredConfigurer().configure();
+    RestAssuredConfigurer configurer = new RestAssuredConfigurer();
+    configurer.configure();
   }
 
 }

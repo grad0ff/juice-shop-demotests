@@ -4,20 +4,22 @@ import static io.qameta.allure.Allure.step;
 import static me.vodarga.api.assertions.AssertJCondition.statusCode;
 import static me.vodarga.core.config.CoreConfig.CORE_CFG;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.params.provider.Arguments.argumentSet;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.specification.RequestSpecification;
 import java.util.stream.Stream;
-import me.vodarga.api.allure.AllureStep;
 import me.vodarga.api.assertions.ProcessingResponse;
 import me.vodarga.api.client.HttpClient;
 import me.vodarga.api.enums.UserType;
 import me.vodarga.api.model.AuthenticationDto;
 import me.vodarga.api.service.ReqSpecRegistry;
+import me.vodarga.core.allure.AllureSteps;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -25,17 +27,18 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 @Feature("user")
 @Story("/user/login")
-@Tag("user")
-public class UserLoginTests extends ApiBaseTest {
+@Tags({@Tag("user"), @Tag("login")})
+public class UserAuthTests extends ApiBaseTest {
 
   private static final String INVALID_CREDS_TEXT = "Invalid email or password.";
   private HttpClient httpClient;
 
   public static Stream<Arguments> failedAuthWithInvalidCredsData() {
     return Stream.of(
-        Arguments.argumentSet("Несуществующий логин", "wrongUser", CORE_CFG.userPassword()),
-        Arguments.argumentSet("Несуществующий пароль", CORE_CFG.userName(), "wrongPassword")
-    );
+        argumentSet("Несуществующий логин", faker.name().username(), CORE_CFG.userPassword()),
+        argumentSet("Несуществующий пароль", CORE_CFG.userName(), faker.internet().password()),
+        argumentSet("Пустой логин",  CORE_CFG.userName(), ""),
+        argumentSet("Пустой пароль", "", CORE_CFG.userPassword()));
   }
 
   @Test
@@ -44,14 +47,14 @@ public class UserLoginTests extends ApiBaseTest {
   void successAuthWithValidCreds() {
     httpClient = new HttpClient(ReqSpecRegistry.getSpec(UserType.NO_USER));
 
-    AllureStep.actionStep();
+    AllureSteps.actionStep();
     ProcessingResponse response = step("Авторизоваться по логину и паролю", () ->
         httpClient.postUserLogin(CORE_CFG.userName(), CORE_CFG.userPassword()));
 
-    AllureStep.assertionStep();
+    AllureSteps.assertionStep();
     step("Проверить успешность авторизации", () -> {
       step("Проверить код ответа", () -> assertThat(response).has(statusCode(200)));
-      step("Проверить тело ответа", () -> {
+      step("Проверить поля тела ответа", () -> {
         var actual = response.as(AuthenticationDto.class);
         softly.assertThat(actual.getAuthentication()).isNotNull();
         softly.assertThat(actual.getAuthentication().getToken()).isNotBlank();
@@ -69,11 +72,11 @@ public class UserLoginTests extends ApiBaseTest {
     RequestSpecification spec = ReqSpecRegistry.getSpec(UserType.NO_USER).noFilters();
     httpClient = new HttpClient(spec);
 
-    AllureStep.actionStep();
+    AllureSteps.actionStep();
     ProcessingResponse response = step("Попытаться авторизоваться по логину и паролю", () ->
         httpClient.postUserLogin(username, password));
 
-    AllureStep.arrangeStep();
+    AllureSteps.arrangeStep();
     step("Проверить невозможность авторизации", () -> {
       step("Проверить код ответа", () -> assertThat(response).has(statusCode(401)));
       step("Проверить отсутствие тела ответа",
