@@ -5,15 +5,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>me.vodarga</groupId>
-  <artifactId>jucie-shop-demotests</artifactId>
+  <artifactId>juice-shop-demotests</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <packaging>pom</packaging>
 
   <modules>
-    <module>jucie-shop-core</module>
-    <module>jucie-shop-api</module>
-    <module>jucie-shop-ui</module>
+    <module>juice-shop-core</module>
+    <module>juice-shop-api</module>
+    <module>juice-shop-ui</module>
   </modules>
 
   <properties>
