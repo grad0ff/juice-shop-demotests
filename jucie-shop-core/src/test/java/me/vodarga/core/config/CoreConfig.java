@@ -6,7 +6,7 @@ import org.aeonbits.owner.ConfigFactory;
 /**
  * Общие настройки модулей
  */
-@Sources("classpath:project.properties")
+@Sources("classpath:core.properties")
 public interface CoreConfig extends org.aeonbits.owner.Config {
 
   CoreConfig CORE_CFG = ConfigFactory.create(CoreConfig.class);
