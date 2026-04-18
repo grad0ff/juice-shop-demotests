@@ -24,6 +24,7 @@
       <artifactId>juice-shop-core</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>test-jar</type>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>

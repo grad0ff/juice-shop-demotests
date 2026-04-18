@@ -12,7 +12,7 @@ public interface ApiConfig extends Config {
 
   ApiConfig API_CFG = ConfigFactory.create(ApiConfig.class);
 
-  @Key("base.path")
-  String basePath();
+  @Key("base.api.path")
+  String baseApiPath();
 
 }
