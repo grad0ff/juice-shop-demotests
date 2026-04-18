@@ -16,7 +16,7 @@ public interface SuiteExtension extends BeforeAllCallback {
   default void beforeAll(ExtensionContext context) {
     context.getRoot()
         .getStore(Namespace.GLOBAL)
-        .getOrComputeIfAbsent(getClass(), key -> {
+        .computeIfAbsent(getClass(), key -> {
           beforeSuite(context);
           return (AutoCloseable) () -> afterSuite(context);
         });
