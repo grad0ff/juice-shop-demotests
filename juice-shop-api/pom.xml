@@ -22,8 +22,6 @@
       <groupId>me.vodarga</groupId>
       <artifactId>juice-shop-core</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <type>test-jar</type>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
@@ -44,5 +42,14 @@
       <artifactId>allure-rest-assured</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

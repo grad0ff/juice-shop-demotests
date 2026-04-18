@@ -11,13 +11,13 @@ public interface CoreConfig extends org.aeonbits.owner.Config {
 
   CoreConfig CORE_CFG = ConfigFactory.create(CoreConfig.class);
 
-  @Key("base.url")
+  @Key("url")
   String baseUrl();
 
-  @Key("user.name")
-  String userName();
+  @Key("email")
+  String userEmail();
 
-  @Key("user.password")
+  @Key("password")
   String userPassword();
 
 }

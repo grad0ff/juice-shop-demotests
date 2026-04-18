@@ -3,6 +3,7 @@ package me.vodarga.ui.selenide.test;
 import static me.vodarga.core.config.CoreConfig.CORE_CFG;
 import static org.junit.jupiter.params.provider.Arguments.argumentSet;
 
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -27,23 +28,25 @@ public class UserAuthTests extends SelenideUiBaseTest {
   public static Stream<Arguments> failedAuthWithInvalidCredsData() {
     return Stream.of(
         argumentSet("Несуществующий логин", faker.name().username(), CORE_CFG.userPassword()),
-        argumentSet("Несуществующий пароль", CORE_CFG.userName(), faker.internet().password())
+        argumentSet("Несуществующий пароль", CORE_CFG.userEmail(), faker.internet().password())
     );
   }
 
   @Test
+  @AllureId("137")
   @DisplayName("Авторизация под существующим пользователем")
   @Description("Проверяется авторизация с валидными логином и паролем пользователя")
   void successAuthWithValidCreds() {
     AllureSteps.actionStep();
     steps.openLogInPage();
-    steps.authorize(CORE_CFG.userName(), CORE_CFG.userPassword());
+    steps.authorize(CORE_CFG.userEmail(), CORE_CFG.userPassword());
 
     AllureSteps.assertionStep();
     steps.assertSuccessAuth();
   }
 
   @ParameterizedTest
+  @AllureId("138")
   @MethodSource("failedAuthWithInvalidCredsData")
   @DisplayName("Попытка авторизации с некорректными учетными данными")
   @Description("Проверяется попытка авторизации с некорректным логином или паролем пользователя")
@@ -57,6 +60,7 @@ public class UserAuthTests extends SelenideUiBaseTest {
   }
 
   @Test
+  @AllureId("139")
   @DisplayName("Появление предупреждений при пустых логине и пароле")
   @Description("Проверяется появление предупреждений о необходимости заполнения полей при пустых логине и пароле пользователя")
   void showWarningsWhenSetEmptyCreds() {

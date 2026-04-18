@@ -1,5 +1,7 @@
 package me.vodarga.api.test;
 
+import static me.vodarga.core.allure.AllureLayer.API;
+
 import me.vodarga.api.extension.RestAssuredConfigExtension;
 import me.vodarga.core.allure.Layer;
 import me.vodarga.core.test.BaseTest;
@@ -7,7 +9,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-@Layer("API")
+@Layer(API)
 @ExtendWith(RestAssuredConfigExtension.class)
 public abstract class ApiBaseTest extends BaseTest {
 

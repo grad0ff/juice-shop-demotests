@@ -1,6 +1,5 @@
 target/
-.*/
 dev/
-jucie-shop-ui/src/test/java/me/vodarga/ui/playwright
+.*/
 
 *.properties

@@ -6,6 +6,7 @@ import static me.vodarga.core.config.CoreConfig.CORE_CFG;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.argumentSet;
 
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -36,12 +37,13 @@ public class UserAuthTests extends ApiBaseTest {
   public static Stream<Arguments> failedAuthWithInvalidCredsData() {
     return Stream.of(
         argumentSet("Несуществующий логин", faker.name().username(), CORE_CFG.userPassword()),
-        argumentSet("Несуществующий пароль", CORE_CFG.userName(), faker.internet().password()),
-        argumentSet("Пустой логин",  CORE_CFG.userName(), ""),
+        argumentSet("Несуществующий пароль", CORE_CFG.userEmail(), faker.internet().password()),
+        argumentSet("Пустой логин",  CORE_CFG.userEmail(), ""),
         argumentSet("Пустой пароль", "", CORE_CFG.userPassword()));
   }
 
   @Test
+  @AllureId("103")
   @DisplayName("Авторизация под существующим пользователем")
   @Description("Проверяется авторизация с валидными логином и паролем пользователя")
   void successAuthWithValidCreds() {
@@ -49,7 +51,7 @@ public class UserAuthTests extends ApiBaseTest {
 
     AllureSteps.actionStep();
     ProcessingResponse response = step("Авторизоваться по логину и паролю", () ->
-        httpClient.postUserLogin(CORE_CFG.userName(), CORE_CFG.userPassword()));
+        httpClient.postUserLogin(CORE_CFG.userEmail(), CORE_CFG.userPassword()));
 
     AllureSteps.assertionStep();
     step("Проверить успешность авторизации", () -> {
@@ -59,12 +61,13 @@ public class UserAuthTests extends ApiBaseTest {
         softly.assertThat(actual.getAuthentication()).isNotNull();
         softly.assertThat(actual.getAuthentication().getToken()).isNotBlank();
         softly.assertThat(actual.getAuthentication().getBid()).isGreaterThan(0);
-        softly.assertThat(actual.getAuthentication().getUmail()).isEqualTo(CORE_CFG.userName());
+        softly.assertThat(actual.getAuthentication().getUmail()).isEqualTo(CORE_CFG.userEmail());
       });
     });
   }
 
   @ParameterizedTest
+  @AllureId("104")
   @MethodSource("failedAuthWithInvalidCredsData")
   @DisplayName("Попытка авторизации с некорректными учетными данными")
   @Description("Проверяется попытка авторизации с некорректным логином или паролем пользователя")
