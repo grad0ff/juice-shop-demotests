@@ -9,6 +9,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import java.util.stream.Stream;
 import me.vodarga.core.allure.AllureSteps;
+import me.vodarga.core.allure.Requirement;
 import me.vodarga.ui.selenide.test.step.UserAuthTestsSteps;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -34,6 +35,7 @@ public class UserAuthTests extends SelenideUiBaseTest {
 
   @Test
   @AllureId("137")
+  @Requirement("AUTH-001-001")
   @DisplayName("Авторизация под существующим пользователем")
   @Description("Проверяется авторизация с валидными логином и паролем пользователя")
   void successAuthWithValidCreds() {
@@ -47,6 +49,7 @@ public class UserAuthTests extends SelenideUiBaseTest {
 
   @ParameterizedTest
   @AllureId("138")
+  @Requirement("AUTH-001-002")
   @MethodSource("failedAuthWithInvalidCredsData")
   @DisplayName("Попытка авторизации с некорректными учетными данными")
   @Description("Проверяется попытка авторизации с некорректным логином или паролем пользователя")
@@ -61,6 +64,7 @@ public class UserAuthTests extends SelenideUiBaseTest {
 
   @Test
   @AllureId("139")
+  @Requirement("AUTH-001-002")
   @DisplayName("Появление предупреждений при пустых логине и пароле")
   @Description("Проверяется появление предупреждений о необходимости заполнения полей при пустых логине и пароле пользователя")
   void showWarningsWhenSetEmptyCreds() {

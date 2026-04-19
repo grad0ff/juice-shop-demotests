@@ -7,5 +7,6 @@ import lombok.NoArgsConstructor;
 public final class AllureLabel {
 
   public static final String LAYER = "layer";
+  public static final String REQUIREMENT = "requirement";
 
 }

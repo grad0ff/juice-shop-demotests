@@ -10,6 +10,7 @@ import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import io.qameta.allure.TmsLink;
 import io.restassured.specification.RequestSpecification;
 import java.util.stream.Stream;
 import me.vodarga.api.assertions.ProcessingResponse;
@@ -18,6 +19,7 @@ import me.vodarga.api.enums.UserType;
 import me.vodarga.api.model.AuthenticationDto;
 import me.vodarga.api.service.ReqSpecRegistry;
 import me.vodarga.core.allure.AllureSteps;
+import me.vodarga.core.allure.Requirement;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -38,12 +40,13 @@ public class UserAuthTests extends ApiBaseTest {
     return Stream.of(
         argumentSet("Несуществующий логин", faker.name().username(), CORE_CFG.userPassword()),
         argumentSet("Несуществующий пароль", CORE_CFG.userEmail(), faker.internet().password()),
-        argumentSet("Пустой логин",  CORE_CFG.userEmail(), ""),
-        argumentSet("Пустой пароль", "", CORE_CFG.userPassword()));
+        argumentSet("Пустой логин", "", CORE_CFG.userPassword()),
+        argumentSet("Пустой пароль",  CORE_CFG.userEmail(), ""));
   }
 
   @Test
   @AllureId("103")
+  @Requirement("AUTH-001-001")
   @DisplayName("Авторизация под существующим пользователем")
   @Description("Проверяется авторизация с валидными логином и паролем пользователя")
   void successAuthWithValidCreds() {
@@ -68,6 +71,7 @@ public class UserAuthTests extends ApiBaseTest {
 
   @ParameterizedTest
   @AllureId("104")
+  @Requirement("AUTH-001-002")
   @MethodSource("failedAuthWithInvalidCredsData")
   @DisplayName("Попытка авторизации с некорректными учетными данными")
   @Description("Проверяется попытка авторизации с некорректным логином или паролем пользователя")
