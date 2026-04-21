@@ -2,13 +2,18 @@ package me.vodarga.api.restassured.spec.factory;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
-import me.vodarga.api.restassured.RequestResponseFilter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public abstract class ReqSpecFactory {
+
+  private final String baseUr;
+  private final String basePath;
 
   public RequestSpecification createSpec() {
     return initBuilder()
-        .addFilter(new RequestResponseFilter())
+        .setBaseUri(baseUr)
+        .setBasePath(basePath)
         .build();
   }
 
