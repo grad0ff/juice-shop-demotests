@@ -11,16 +11,20 @@ import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.RequiredArgsConstructor;
+import org.hamcrest.Matcher;
 
-public class RequestResponseFilter implements Filter {
+@RequiredArgsConstructor
+public class StatusCodeBasedFilter implements Filter {
 
   private static final Set<String> blacklistedHeaders = new HashSet<>();
+  private final Matcher<Integer> statusCodeMatcher;
 
   @Override
   public Response filter(FilterableRequestSpecification requestSpec,
       FilterableResponseSpecification responseSpec, FilterContext ctx) {
     Response response = ctx.next(requestSpec, responseSpec);
-    if (response.statusCode() >= 400) {
+    if (statusCodeMatcher.matches(response.statusCode())) {
       printRequest(requestSpec);
       printResponse(response);
     }
