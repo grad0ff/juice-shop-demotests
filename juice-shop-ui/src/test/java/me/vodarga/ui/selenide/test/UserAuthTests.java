@@ -28,8 +28,8 @@ public class UserAuthTests extends SelenideUiBaseTest {
 
   public static Stream<Arguments> failedAuthWithInvalidCredsData() {
     return Stream.of(
-        argumentSet("Несуществующий логин", faker.name().username(), CORE_CFG.userPassword()),
-        argumentSet("Несуществующий пароль", CORE_CFG.userEmail(), faker.internet().password())
+        argumentSet("Неправильный логин", faker.name().username(), CORE_CFG.userPassword()),
+        argumentSet("Неправильный пароль", CORE_CFG.userEmail(), faker.internet().password())
     );
   }
 

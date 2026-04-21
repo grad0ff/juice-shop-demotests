@@ -10,14 +10,13 @@ import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import io.qameta.allure.TmsLink;
 import io.restassured.specification.RequestSpecification;
 import java.util.stream.Stream;
 import me.vodarga.api.assertions.ProcessingResponse;
 import me.vodarga.api.client.HttpClient;
 import me.vodarga.api.enums.UserType;
 import me.vodarga.api.model.AuthenticationDto;
-import me.vodarga.api.service.ReqSpecRegistry;
+import me.vodarga.api.restassured.spec.factory.NoUserReqSpecFactory;
 import me.vodarga.core.allure.AllureSteps;
 import me.vodarga.core.allure.Requirement;
 import org.junit.jupiter.api.DisplayName;
@@ -38,10 +37,10 @@ public class UserAuthTests extends ApiBaseTest {
 
   public static Stream<Arguments> failedAuthWithInvalidCredsData() {
     return Stream.of(
-        argumentSet("Несуществующий логин", faker.name().username(), CORE_CFG.userPassword()),
-        argumentSet("Несуществующий пароль", CORE_CFG.userEmail(), faker.internet().password()),
+        argumentSet("Неправильный логин", faker.name().username(), CORE_CFG.userPassword()),
+        argumentSet("Неправильный пароль", CORE_CFG.userEmail(), faker.internet().password()),
         argumentSet("Пустой логин", "", CORE_CFG.userPassword()),
-        argumentSet("Пустой пароль",  CORE_CFG.userEmail(), ""));
+        argumentSet("Пустой пароль", CORE_CFG.userEmail(), ""));
   }
 
   @Test

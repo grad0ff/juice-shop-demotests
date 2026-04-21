@@ -24,4 +24,5 @@ public class SelenideConfigExtension implements SuiteExtension, AfterEachCallbac
     Selenide.clearBrowserLocalStorage();
     Selenide.closeWindow();
   }
+
 }
