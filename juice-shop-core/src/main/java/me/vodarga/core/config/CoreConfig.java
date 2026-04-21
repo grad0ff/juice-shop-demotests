@@ -1,5 +1,6 @@
 package me.vodarga.core.config;
 
+import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 import org.aeonbits.owner.ConfigFactory;
 
@@ -7,7 +8,7 @@ import org.aeonbits.owner.ConfigFactory;
  * Общие настройки модулей
  */
 @Sources("classpath:core.properties")
-public interface CoreConfig extends org.aeonbits.owner.Config {
+public interface CoreConfig extends Config {
 
   CoreConfig CORE_CFG = ConfigFactory.create(CoreConfig.class);
 
