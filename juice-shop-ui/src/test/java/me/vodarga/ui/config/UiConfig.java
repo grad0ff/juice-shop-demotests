@@ -12,7 +12,7 @@ public interface UiConfig extends Config {
 
   UiConfig UI_CFG = ConfigFactory.create(UiConfig.class);
 
-  @Key("base.ui.path")
+  @Key("ui.path")
   String basePath();
 
 }
