@@ -2,6 +2,7 @@ package me.vodarga.api.test;
 
 import static io.qameta.allure.Allure.step;
 import static me.vodarga.api.assertions.AssertJCondition.statusCode;
+import static me.vodarga.api.config.ApiConfig.API_CFG;
 import static me.vodarga.core.config.CoreConfig.CORE_CFG;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.argumentSet;
@@ -14,11 +15,11 @@ import io.restassured.specification.RequestSpecification;
 import java.util.stream.Stream;
 import me.vodarga.api.assertions.ProcessingResponse;
 import me.vodarga.api.client.HttpClient;
-import me.vodarga.api.enums.UserType;
 import me.vodarga.api.model.AuthenticationDto;
 import me.vodarga.api.restassured.spec.factory.NoUserReqSpecFactory;
 import me.vodarga.core.allure.AllureSteps;
 import me.vodarga.core.allure.Requirement;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -33,7 +34,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class UserAuthTests extends ApiBaseTest {
 
   private static final String INVALID_CREDS_TEXT = "Invalid email or password.";
-  private HttpClient httpClient;
+  private static HttpClient httpClient;
+
+  @BeforeAll
+  static void beforeAll() {
+    AllureSteps.arrangeStep();
+    step("Подготовить HTTP клиент");
+    RequestSpecification spec = new NoUserReqSpecFactory(appExtension.getUrl(), API_CFG.baseApiPath()).createSpec();
+    httpClient = new HttpClient(spec);
+  }
 
   public static Stream<Arguments> failedAuthWithInvalidCredsData() {
     return Stream.of(
@@ -49,8 +58,6 @@ public class UserAuthTests extends ApiBaseTest {
   @DisplayName("Авторизация под существующим пользователем")
   @Description("Проверяется авторизация с валидными логином и паролем пользователя")
   void successAuthWithValidCreds() {
-    httpClient = new HttpClient(ReqSpecRegistry.getSpec(UserType.NO_USER));
-
     AllureSteps.actionStep();
     ProcessingResponse response = step("Авторизоваться по логину и паролю", () ->
         httpClient.postUserLogin(CORE_CFG.userEmail(), CORE_CFG.userPassword()));
@@ -75,9 +82,6 @@ public class UserAuthTests extends ApiBaseTest {
   @DisplayName("Попытка авторизации с некорректными учетными данными")
   @Description("Проверяется попытка авторизации с некорректным логином или паролем пользователя")
   void failedAuthWithInvalidCreds(String username, String password) {
-    RequestSpecification spec = ReqSpecRegistry.getSpec(UserType.NO_USER).noFilters();
-    httpClient = new HttpClient(spec);
-
     AllureSteps.actionStep();
     ProcessingResponse response = step("Попытаться авторизоваться по логину и паролю", () ->
         httpClient.postUserLogin(username, password));

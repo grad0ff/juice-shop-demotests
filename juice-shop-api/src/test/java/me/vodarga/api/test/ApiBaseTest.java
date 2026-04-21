@@ -2,7 +2,7 @@ package me.vodarga.api.test;
 
 import static me.vodarga.core.allure.AllureLayer.API;
 
-import me.vodarga.api.extension.RestAssuredConfigExtension;
+import me.vodarga.api.junit.extension.RestAssuredConfigExtension;
 import me.vodarga.core.allure.Layer;
 import me.vodarga.core.test.BaseTest;
 import org.assertj.core.api.SoftAssertions;

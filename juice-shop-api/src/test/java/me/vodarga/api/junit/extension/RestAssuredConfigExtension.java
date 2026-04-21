@@ -1,4 +1,4 @@
-package me.vodarga.api.extension;
+package me.vodarga.api.junit.extension;
 
 import me.vodarga.api.service.RestAssuredConfigurer;
 import me.vodarga.core.SuiteExtension;

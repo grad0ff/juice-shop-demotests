@@ -25,6 +25,7 @@
     <owner.version>1.0.12</owner.version>
     <lombok.version>1.18.36</lombok.version>
     <javafaker.version>1.0.2</javafaker.version>
+    <testcontainers.version>2.0.5</testcontainers.version>
     <log4j.version>2.25.2</log4j.version>
     <allure-maven.version>2.16.1</allure-maven.version>
     <allure.version>2.29.0</allure.version>
@@ -62,6 +63,13 @@
         <groupId>com.github.javafaker</groupId>
         <artifactId>javafaker</artifactId>
         <version>${javafaker.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>${testcontainers.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
