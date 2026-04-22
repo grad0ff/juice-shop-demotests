@@ -1,7 +1,7 @@
 package me.vodarga.api.junit.extension;
 
 import me.vodarga.api.service.RestAssuredConfigurer;
-import me.vodarga.core.SuiteExtension;
+import me.vodarga.core.junit.extension.SuiteExtension;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class RestAssuredConfigExtension implements SuiteExtension {

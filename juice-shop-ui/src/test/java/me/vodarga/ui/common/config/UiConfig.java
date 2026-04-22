@@ -1,4 +1,4 @@
-package me.vodarga.ui.config;
+package me.vodarga.ui.common.config;
 
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;

@@ -7,9 +7,9 @@ import static org.openqa.selenium.Keys.TAB;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
 import me.vodarga.ui.selenide.utils.SelenideActions;
-import me.vodarga.ui.selenide.ui.component.WelcomeBanner;
-import me.vodarga.ui.selenide.ui.page.IndexPage;
-import me.vodarga.ui.selenide.ui.page.LoginPage;
+import me.vodarga.ui.selenide.gui.component.WelcomeBanner;
+import me.vodarga.ui.selenide.gui.page.IndexPage;
+import me.vodarga.ui.selenide.gui.page.LoginPage;
 import me.vodarga.ui.selenide.test.UserAuthTests;
 
 /**

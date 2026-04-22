@@ -15,7 +15,7 @@ import io.restassured.specification.RequestSpecification;
 import java.util.stream.Stream;
 import me.vodarga.api.assertions.ProcessingResponse;
 import me.vodarga.api.client.HttpClient;
-import me.vodarga.api.model.AuthenticationDto;
+import me.vodarga.api.dto.AuthenticationDto;
 import me.vodarga.api.restassured.spec.factory.NoUserReqSpecFactory;
 import me.vodarga.core.allure.AllureSteps;
 import me.vodarga.core.allure.Requirement;

@@ -1,4 +1,4 @@
-package me.vodarga.core.enums;
+package me.vodarga.core.data.enums;
 
 public enum UserType {
 

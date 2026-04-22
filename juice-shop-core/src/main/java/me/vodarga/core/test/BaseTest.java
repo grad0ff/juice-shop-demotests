@@ -3,7 +3,7 @@ package me.vodarga.core.test;
 import static me.vodarga.core.config.AppConfig.APP_CFG;
 
 import com.github.javafaker.Faker;
-import me.vodarga.core.JuiceShopExtension;
+import me.vodarga.core.junit.extension.JuiceShopExtension;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 public abstract class BaseTest {

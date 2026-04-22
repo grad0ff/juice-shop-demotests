@@ -1,8 +1,8 @@
-package me.vodarga.ui.junit.extension;
+package me.vodarga.ui.common.junit.extension;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import me.vodarga.core.SuiteExtension;
+import me.vodarga.core.junit.extension.SuiteExtension;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;

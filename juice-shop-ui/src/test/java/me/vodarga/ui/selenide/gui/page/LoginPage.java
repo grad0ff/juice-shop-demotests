@@ -1,4 +1,4 @@
-package me.vodarga.ui.selenide.ui.page;
+package me.vodarga.ui.selenide.gui.page;
 
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selectors.withText;

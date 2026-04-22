@@ -4,7 +4,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 import io.restassured.authentication.BasicAuthScheme;
 import io.restassured.builder.RequestSpecBuilder;
-import me.vodarga.api.model.User;
+import me.vodarga.core.model.User;
 import me.vodarga.api.restassured.StatusCodeBasedFilter;
 
 public class AdminReqSpecFactory extends ReqSpecFactory {
