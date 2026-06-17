@@ -28,8 +28,8 @@ public class UserAuthTests extends SelenideUiBaseTest {
 
   public static Stream<Arguments> failedAuthWithInvalidCredsData() {
     return Stream.of(
-        argumentSet("Неправильный логин", faker.name().username(), CORE_CFG.userPassword()),
-        argumentSet("Неправильный пароль", CORE_CFG.userEmail(), faker.internet().password())
+        argumentSet("Неправильный логин", faker.name().username(), CORE_CFG.adminPassword()),
+        argumentSet("Неправильный пароль", CORE_CFG.adminEmail(), faker.internet().password())
     );
   }
 
@@ -41,7 +41,7 @@ public class UserAuthTests extends SelenideUiBaseTest {
   void successAuthWithValidCreds() {
     AllureSteps.actionStep();
     steps.openLogInPage();
-    steps.authorize(CORE_CFG.userEmail(), CORE_CFG.userPassword());
+    steps.authorize(CORE_CFG.adminEmail(), CORE_CFG.adminPassword());
 
     AllureSteps.assertionStep();
     steps.assertSuccessAuth();
