@@ -1,4 +1,4 @@
-package me.vodarga.core;
+package me.vodarga.core.junit.extension;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

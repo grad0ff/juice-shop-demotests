@@ -2,7 +2,6 @@ package me.vodarga.api.test;
 
 import static io.qameta.allure.Allure.step;
 import static me.vodarga.api.assertions.AssertJCondition.statusCode;
-import static me.vodarga.api.config.ApiConfig.API_CFG;
 import static me.vodarga.core.config.CoreConfig.CORE_CFG;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.argumentSet;
@@ -15,10 +14,12 @@ import io.restassured.specification.RequestSpecification;
 import java.util.stream.Stream;
 import me.vodarga.api.assertions.ProcessingResponse;
 import me.vodarga.api.client.HttpClient;
-import me.vodarga.api.model.AuthenticationDto;
-import me.vodarga.api.restassured.spec.factory.NoUserReqSpecFactory;
+import me.vodarga.api.data.ReqSpecRegistry;
+import me.vodarga.api.dto.AuthenticationDto;
+import me.vodarga.api.dto.UserDto;
 import me.vodarga.core.allure.AllureSteps;
 import me.vodarga.core.allure.Requirement;
+import me.vodarga.core.enums.RoleType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -38,18 +39,16 @@ public class UserAuthTests extends ApiBaseTest {
 
   @BeforeAll
   static void beforeAll() {
-    AllureSteps.arrangeStep();
-    step("Подготовить HTTP клиент");
-    RequestSpecification spec = new NoUserReqSpecFactory(appExtension.getUrl(), API_CFG.baseApiPath()).createSpec();
+    RequestSpecification spec = ReqSpecRegistry.getSpec(RoleType.NO_USER);
     httpClient = new HttpClient(spec);
   }
 
   public static Stream<Arguments> failedAuthWithInvalidCredsData() {
     return Stream.of(
-        argumentSet("Неправильный логин", faker.name().username(), CORE_CFG.userPassword()),
-        argumentSet("Неправильный пароль", CORE_CFG.userEmail(), faker.internet().password()),
-        argumentSet("Пустой логин", "", CORE_CFG.userPassword()),
-        argumentSet("Пустой пароль", CORE_CFG.userEmail(), ""));
+        argumentSet("Неправильный логин", faker.name().username(), CORE_CFG.adminPassword()),
+        argumentSet("Неправильный пароль", CORE_CFG.adminEmail(), faker.internet().password()),
+        argumentSet("Пустой логин", "", CORE_CFG.adminPassword()),
+        argumentSet("Пустой пароль", CORE_CFG.adminEmail(), ""));
   }
 
   @Test
@@ -58,9 +57,10 @@ public class UserAuthTests extends ApiBaseTest {
   @DisplayName("Авторизация под существующим пользователем")
   @Description("Проверяется авторизация с валидными логином и паролем пользователя")
   void successAuthWithValidCreds() {
+    var user = new UserDto(CORE_CFG.adminEmail(), CORE_CFG.adminPassword());
+
     AllureSteps.actionStep();
-    ProcessingResponse response = step("Авторизоваться по логину и паролю", () ->
-        httpClient.postUserLogin(CORE_CFG.userEmail(), CORE_CFG.userPassword()));
+    ProcessingResponse response = step("Авторизоваться по логину и паролю", () -> httpClient.postUserLogin(user));
 
     AllureSteps.assertionStep();
     step("Проверить успешность авторизации", () -> {
@@ -70,7 +70,7 @@ public class UserAuthTests extends ApiBaseTest {
         softly.assertThat(actual.getAuthentication()).isNotNull();
         softly.assertThat(actual.getAuthentication().getToken()).isNotBlank();
         softly.assertThat(actual.getAuthentication().getBid()).isGreaterThan(0);
-        softly.assertThat(actual.getAuthentication().getUmail()).isEqualTo(CORE_CFG.userEmail());
+        softly.assertThat(actual.getAuthentication().getUmail()).isEqualTo(CORE_CFG.adminEmail());
       });
     });
   }
@@ -81,10 +81,12 @@ public class UserAuthTests extends ApiBaseTest {
   @MethodSource("failedAuthWithInvalidCredsData")
   @DisplayName("Попытка авторизации с некорректными учетными данными")
   @Description("Проверяется попытка авторизации с некорректным логином или паролем пользователя")
-  void failedAuthWithInvalidCreds(String username, String password) {
+  void failedAuthWithInvalidCreds(String email, String password) {
+    var user = new UserDto(email, password);
+
     AllureSteps.actionStep();
     ProcessingResponse response = step("Попытаться авторизоваться по логину и паролю", () ->
-        httpClient.postUserLogin(username, password));
+        httpClient.postUserLogin(user));
 
     AllureSteps.arrangeStep();
     step("Проверить невозможность авторизации", () -> {

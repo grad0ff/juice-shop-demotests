@@ -1,12 +1,10 @@
 package me.vodarga.ui.selenide.test;
 
+import me.vodarga.ui.common.junit.extension.SelenideConfigExtension;
 import me.vodarga.ui.common.test.UiBaseTest;
-import me.vodarga.ui.junit.extension.SelenideConfigExtension;
-import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(SelenideConfigExtension.class)
 abstract class SelenideUiBaseTest extends UiBaseTest {
-
-  @RegisterExtension
-  private static final SelenideConfigExtension selenideExtension = new SelenideConfigExtension();
 
 }

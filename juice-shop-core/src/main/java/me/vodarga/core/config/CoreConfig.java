@@ -12,13 +12,13 @@ public interface CoreConfig extends Config {
 
   CoreConfig CORE_CFG = ConfigFactory.create(CoreConfig.class);
 
-  @Key("url")
+  @Key("app.url")
   String baseUrl();
 
-  @Key("email")
-  String userEmail();
+  @Key("app.admin.email")
+  String adminEmail();
 
-  @Key("password")
-  String userPassword();
+  @Key("app.admin.password")
+  String adminPassword();
 
 }

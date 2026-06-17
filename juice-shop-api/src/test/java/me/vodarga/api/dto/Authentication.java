@@ -1,4 +1,4 @@
-package me.vodarga.api.model;
+package me.vodarga.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

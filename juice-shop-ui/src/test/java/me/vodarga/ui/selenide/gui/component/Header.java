@@ -1,4 +1,4 @@
-package me.vodarga.ui.selenide.ui.component;
+package me.vodarga.ui.selenide.gui.component;
 
 import static com.codeborne.selenide.Selenide.$;
 

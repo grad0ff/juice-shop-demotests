@@ -1,4 +1,4 @@
-package me.vodarga.core;
+package me.vodarga.core.junit.extension;
 
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

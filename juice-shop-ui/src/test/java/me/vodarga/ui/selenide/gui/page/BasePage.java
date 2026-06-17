@@ -1,8 +1,8 @@
-package me.vodarga.ui.selenide.ui.page;
+package me.vodarga.ui.selenide.gui.page;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;
-import me.vodarga.ui.selenide.ui.component.Header;
+import me.vodarga.ui.selenide.gui.component.Header;
 
 @Getter
 @Accessors(fluent = true)

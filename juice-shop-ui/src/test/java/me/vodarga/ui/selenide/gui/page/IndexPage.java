@@ -1,4 +1,4 @@
-package me.vodarga.ui.selenide.ui.page;
+package me.vodarga.ui.selenide.gui.page;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;
