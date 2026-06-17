@@ -10,6 +10,6 @@ public abstract class BasePage {
 
   public final Header header = new Header();
 
-  public abstract String pagePath() ;
+  public abstract String pagePath();
 
 }

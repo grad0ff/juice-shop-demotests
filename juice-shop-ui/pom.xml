@@ -12,11 +12,6 @@
 
   <artifactId>juice-shop-ui</artifactId>
 
-  <properties>
-    <selenide.version>6.19.1</selenide.version>
-    <playwright.version>1.56.0</playwright.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>me.vodarga</groupId>
@@ -26,12 +21,10 @@
     <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
-      <version>${selenide.version}</version>
     </dependency>
     <dependency>
       <groupId>com.microsoft.playwright</groupId>
       <artifactId>playwright</artifactId>
-      <version>${playwright.version}</version>
     </dependency>
   </dependencies>
 
