@@ -7,11 +7,11 @@ import io.restassured.builder.RequestSpecBuilder;
 import me.vodarga.core.model.User;
 import me.vodarga.api.restassured.StatusCodeBasedFilter;
 
-public class AdminReqSpecFactory extends ReqSpecFactory {
+public class UserReqSpecFactory extends ReqSpecFactory {
 
   private final User user;
 
-  public AdminReqSpecFactory(String baseUr, String basePath, User user) {
+  public UserReqSpecFactory(String baseUr, String basePath, User user) {
     super(baseUr, basePath);
     this.user = user;
   }
@@ -19,7 +19,7 @@ public class AdminReqSpecFactory extends ReqSpecFactory {
   @Override
   RequestSpecBuilder initBuilder() {
     var authScheme = new BasicAuthScheme();
-    authScheme.setUserName(user.name());
+    authScheme.setUserName(user.email());
     authScheme.setPassword(user.password());
     return new RequestSpecBuilder()
         .addFilter(new StatusCodeBasedFilter(greaterThanOrEqualTo(500)))
