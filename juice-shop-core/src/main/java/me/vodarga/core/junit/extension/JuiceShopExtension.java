@@ -39,9 +39,9 @@ public class JuiceShopExtension implements BeforeAllCallback {
     Store store = context.getRoot()
         .getStore(Namespace.GLOBAL);
     store.computeIfAbsent(getClass(), key -> {
-          beforeSuite(context);
-          return (AutoCloseable) () -> afterSuite(context);
-        });
+      beforeSuite(context);
+      return (AutoCloseable) () -> afterSuite(context);
+    });
     store.put("APP", juiceShop);
     store.put("APP_URL", url);
   }
